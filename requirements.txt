@@ -1,0 +1,10 @@
+docker
+kubernetes
+numpy
+scipy
+pandas
+sklearn
+h5py
+opencv-python
+tensorflow
+keras
