@@ -7,6 +7,7 @@ from keras.datasets import imdb
 
 from keras_lstm_model_builder import KerasLstmModelBuilder
 
+_USE_PRE_TRAINED_GLOVE_EMBEDDING = True
 
 def train_lstm_model_with_imdb_review(batch_size, epoches):
     # prepare the imdb data
@@ -24,8 +25,11 @@ def train_lstm_model_with_imdb_review(batch_size, epoches):
     print("Training Sequence Shape: {} \n".format(x_train.shape))
     print("Testing Sequence Shape: {} \n".format(x_test.shape))
 
+    word_index = imdb.get_word_index()
+    print("Number of Words in imdb dataset is {} \n".format(len(word_index)))
+
     # build the model
-    lstm_model_builder = KerasLstmModelBuilder()
+    lstm_model_builder = KerasLstmModelBuilder(word_index) if _USE_PRE_TRAINED_GLOVE_EMBEDDING else KerasLstmModelBuilder()
     model = lstm_model_builder.build_lstm_with_embedding_model(max_features, maxlen)
 
     print('Start training...\n')
